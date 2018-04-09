@@ -12,6 +12,11 @@ public class HomeController {
     return "witaj";
 
     }
+    @GetMapping("/login")
+    @ResponseBody
+    public String login (){
+        return "login";
 
+    }
 
 }
