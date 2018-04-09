@@ -17,8 +17,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 @Override
 protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-            .antMatchers("/login").permitAll().
-                    anyRequest().authenticated().and()
+            .antMatchers("/login").permitAll()
+            .antMatchers("/admin").hasRole("ADMIN")
+                    .anyRequest().authenticated().and()
                     .formLogin()
                         .loginPage("/login")
     .and()
@@ -26,7 +27,7 @@ protected void configure(HttpSecurity http) throws Exception {
 }
     @Override
     protected void configure (AuthenticationManagerBuilder auth) throws Exception {
-        UserDetails user = User.withDefaultPasswordEncoder().username ("user").password("123").roles("USER").build();
+        UserDetails user = User.withDefaultPasswordEncoder().username ("user").password("123").roles("ADMIN").build();
         auth.inMemoryAuthentication().withUser(user);
     }
 }
