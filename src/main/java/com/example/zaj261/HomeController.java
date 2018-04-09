@@ -13,7 +13,6 @@ public class HomeController {
 
     }
     @GetMapping("/login")
-    @ResponseBody
     public String login (){
         return "login";
 

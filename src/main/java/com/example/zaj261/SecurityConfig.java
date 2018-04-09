@@ -20,7 +20,9 @@ protected void configure(HttpSecurity http) throws Exception {
             .antMatchers("/login").permitAll().
                     anyRequest().authenticated().and()
                     .formLogin()
-                        .loginPage("/login");
+                        .loginPage("/login")
+    .and()
+    .csrf().disable();
 }
     @Override
     protected void configure (AuthenticationManagerBuilder auth) throws Exception {
