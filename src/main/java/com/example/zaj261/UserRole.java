@@ -12,6 +12,7 @@ public class UserRole {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
+
     private String username;
     private String role;
 

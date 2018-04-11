@@ -3,20 +3,35 @@ package com.example.zaj261;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
     @GetMapping("/")
-    @ResponseBody
     public String main (){
-    return "witaj";
+    return "index";
 
     }
     @GetMapping("/login")
     public String login (){
         return "login";
+
+    }
+
+    @PostMapping("/logowanie")
+    public String logowanie (){
+        return "lindex";
+
+    }
+
+    @GetMapping("/rejestracja")
+    public String rejestracja (){
+
+        // tu będzie zapis do bazy
+
+        return "zarejestrowany";
 
     }
 
