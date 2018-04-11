@@ -28,12 +28,19 @@ public class HomeController {
 
     @GetMapping("/rejestracja")
     public String rejestracja (){
+        return "rejestracja";
+
+    }
+
+    @PostMapping("/register")
+    public String register (){
 
         // tu będzie zapis do bazy
 
         return "zarejestrowany";
 
     }
+
 
     @GetMapping("/admin")
     public String adm (){
