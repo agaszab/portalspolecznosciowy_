@@ -41,6 +41,13 @@ public class HomeController {
 
     }
 
+    @GetMapping("/profil")
+    public String profil (){
+
+        return "profil";
+
+    }
+
 
     @GetMapping("/admin")
     public String adm (){
