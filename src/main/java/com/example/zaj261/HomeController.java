@@ -2,13 +2,21 @@ package com.example.zaj261;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import repository.UserRepository;
+
+import java.security.Principal;
 
 @Controller
 public class HomeController {
+
+    UserRepository userRepository;
+
+
     @GetMapping("/")
     public String main (){
     return "index";
@@ -21,8 +29,15 @@ public class HomeController {
     }
 
     @PostMapping("/logowanie")
-    public String logowanie (){
-        return "lindex";
+    public String logowanie (Model model, Principal principal){
+            String login=principal.getName();
+            User user=userRepository.findByUsername(login);
+            if(user!=null) {
+                model.addAttribute("user", user);
+                return "lindex";
+            } else return "login";
+
+
 
     }
 
@@ -42,9 +57,14 @@ public class HomeController {
     }
 
     @GetMapping("/profil")
-    public String profil (){
+    public String profil (Model model, Principal principal){
 
-        return "profil";
+        String login=principal.getName();
+        User user=userRepository.findByUsername(login);
+        if(user!=null) {
+            model.addAttribute("user", user);
+            return "profil";
+        } else return "login";
 
     }
 
