@@ -1,4 +1,4 @@
-package repository;
+package com.example.zaj261;
 
 
 import com.example.zaj261.User;
