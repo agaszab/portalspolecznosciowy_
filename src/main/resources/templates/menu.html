@@ -59,13 +59,37 @@
 </div>
 
 
-<div>
+<div>  // dla niezalogowanych
     <ul th:fragment="menu">
-        <li><a href="/"><img src="home.png" width="20px" style="display: inline; float: left; margin-right: 9px">Portal społocznościowy</a></li>
-        <li><a href="/login">Zaloguj się</a></li>
-        <li><a href="/rejestracja">Zarejestruj się</a></li>
+        <li><a href="/">Portal społocznościowy</a></li>
+        <li><a href="/login">Logowanie</a></li>
+        <li><a href="/rejestracja">Rejestracja</a></li>
+        <li><a href="/kontakt">Kontakt z adminem</a></li>
+    </ul>
+</div>
+
+<div> // dla zalogowanych
+    <ul th:fragment="menu1">
+        <li><a href="/lindex">Portal społocznościowy</a></li>
+        <li><a href="/szukaj">Wyszukaj użytkownia</a></li>
+        <li><a href="/zapros">Zaproś znajomych</a></li>
         <li><a href="/profil">Twój profilt</a></li>
-    </ul></div>
+        <li><a href="/moiznajomi">Lista Twoich znajomych</a></li>
+        <li><a href="/kontakt">Kontakt z adminem</a></li>
+        <li><a href="/wyloguj">Wyloguj się</a></li>
+    </ul>
+</div>
+
+<div> // dla admina
+    <ul th:fragment="menu2">
+        <li><a href="/">Panel administracyjny portalu</a></li>
+        <li><a href="/panel/users">Lista użytkowników</a></li>
+        <li><a href="/panel/szukaj">Wyszukaj użytkownika</a></li>
+        <li><a href="/panel/doakceptacji">Lista oczekujących na akceptację</a></li>
+        <li><a href="/ppanel/profil">Twój profilt</a></li>
+        <li><a href="/wyloguj">Wyloguj się</a></li>
+    </ul>
+</div>
 
 
 </body>

@@ -27,10 +27,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/rejestracja").permitAll()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/koduj").permitAll()
+                .antMatchers("/kontakt").permitAll()
+                .antMatchers("/wszyscy/*").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/panel/*").hasRole("ADMIN")
                 .anyRequest().authenticated().and()
                 .formLogin()
-                .loginPage("/login");
+                .loginPage("/login")
+                .and()
+                .logout().logoutUrl("/logout")
+                .logoutSuccessUrl("/");
 
 
     }

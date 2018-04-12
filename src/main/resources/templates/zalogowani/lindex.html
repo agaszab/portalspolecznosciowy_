@@ -18,12 +18,10 @@
 </head>
 
 <body>
-<ul th:include="menu :: menu" class="navbar navbar-default"></ul>
+<ul th:include="menu :: menu1" class="navbar navbar-default"></ul>
 <div  class="container">
 
-    <div  class="text-justify" ><h1 style="margin-top:200px; test-align:center;">Profil użytkownika:  </h1></div>
-    <p th:text="${user.username}">
-    jakieś dane
+    <div  class="text-justify" ><h1 th:text="'Zostałeś zalogowany pomyślnie!  Witaj '+${user.username}" style="margin-top:200px; test-align:center;"> </h1></div>
 
 </div>
 

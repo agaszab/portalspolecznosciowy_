@@ -1,32 +1,41 @@
 package com.example.zaj261;
 
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+
 
 @Controller
 public class HomeController {
 
-    UserRepository userRepository;
+    private UserRepository userRepository;
+    private UserRoleRepository userRoleRepository;
 
-    public HomeController(UserRepository userRepository) {
+    public HomeController(UserRepository userRepository, UserRoleRepository userRoleRepository) {
         this.userRepository = userRepository;
+        this.userRoleRepository = userRoleRepository;
     }
 
-    @GetMapping("/")
+  @GetMapping("/")
     public String main (){
-    return "index";
+    return "wszyscy/index";
 
     }
+
+
+    @GetMapping("/lindex")
+    public String zalogowani (){
+        return "zalogowani/lindex";
+
+    }
+
     @GetMapping("/login")
     public String login (){
-        return "login";
+        return "wszyscy/login";
 
     }
 
@@ -36,25 +45,44 @@ public class HomeController {
             User user=userRepository.findByUsername(login);
             if(user!=null) {
                 model.addAttribute("user", user);
-                return "lindex";
-            } else return "login";
-
-
+                return "zalogowani/lindex";
+            } else return "wszyscy/login";
 
     }
 
+    @GetMapping("/wyloguj")
+    public String wyloguj () {
+        return "/zalogowani/logout_form";
+    }
+
+    @PostMapping ("/logout")
+        public String logoutme ()  {
+                return "/";
+    }
     @GetMapping("/rejestracja")
-    public String rejestracja (){
-        return "rejestracja";
+    public String rejestracja (Model model){
+        model.addAttribute("user", new User());
+        return "wszyscy/rejestracja";
 
     }
 
     @PostMapping("/register")
     public String register (){
 
-        // tu będzie zapis do bazy
+            return "wszyscy/zarejestrowany";
 
-        return "zarejestrowany";
+
+    }
+    @GetMapping("/kontakt")
+    public String kontakt () {
+        return "/wszyscy/kontakt";
+    }
+
+    @PostMapping("/adminkontakt")
+    public String  adminkontakt(){
+
+        return "wszyscy/wyslana";
+
 
     }
 
@@ -65,17 +93,13 @@ public class HomeController {
         User user=userRepository.findByUsername(login);
         if(user!=null) {
             model.addAttribute("user", user);
-            return "profil";
-        } else return "login";
+            return "zalogowani/profil";
+        } else return "wszyscy/login";
 
     }
 
 
-    @GetMapping("/admin")
-    public String adm (){
-        return "admin";
 
-    }
 
     @GetMapping ("/koduj")
     @ResponseBody
