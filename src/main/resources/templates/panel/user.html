@@ -24,11 +24,12 @@
 
         <h1 style="margin-top:200px; test-align:center;">Panel administracyjny </h1>
 
+    <h1 th:text="${user.firstName}+' '+${user.lastName}"></h1>
 
-dhgfhdgfdhfhg
-
-
-
+    <p th:text="'login: '+${user.username}"></p>
+    <p th:text="'e-mail: '+${user.email}"></p>
+    <p th:text="'Czy konto aktywne: '+${user.enabled}"></p>
+    <p th:text="'Id: '+${user.id}"></p>
 
 </div>
 

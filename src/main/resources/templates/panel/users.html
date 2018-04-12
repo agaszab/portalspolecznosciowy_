@@ -27,8 +27,9 @@
 
     <ul class="list-group">
         <li class="list-group-item" th:each="user: ${users}">
-            <a style="display: inline; float: left" th:href="'/osoba?id='+${user.id}"   th:text="${user.lastName} +' '+${user.firstName}"></a>
-            <span style="display: inline; float: right"  th:include="menu :: iko_osoby" class="navbar navbar-default"></span>
+            <a style="display: inline; float: left" th:href="'panel/user?id='+${user.id}"   th:text="${user.lastName} +' '+${user.firstName}"></a>
+            <a style="display: inline; float: left" th:href="'/user?id='+${user.id}"   th:text="${user.lastName} +' '+${user.firstName}"></a>
+            <span style="display: inline; float: right"  th:include="menu :: iko_users" class="navbar navbar-default"></span>
         </li>
 
     </ul>

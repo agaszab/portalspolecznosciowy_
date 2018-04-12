@@ -92,8 +92,8 @@
 </div>
 
 <div th:fragment="iko_users">
-    <a  style="display: inline;  float: left" title="edycja danych osoby" th:href="'edycjaosoby?id='+${user.id}"><img src="../edit.png" width="20px"></a>
-    <a style="display: inline; float: right" title="skasuj osobę" th:href="'delosoba?id='+${user.id}"><img src="../delete.png" width="20px"></a>
+    <a  style="display: inline;  float: left" title="edycja danych użytkownika" th:href="'panel/eduser?id='+${user.id}"><img src="../edit.png" width="20px"></a>
+    <a style="display: inline; float: right" title="skasuj użytkownika" th:href="'panel/deluser?id='+${user.id}"><img src="../delete.png" width="20px"></a>
 </div>
 
 </body>

@@ -20,8 +20,18 @@
 <body>
 <ul th:include="menu :: menu2" class="navbar navbar-default"></ul>
 <div  class="container">
+<h1 style="margin-top:200px; test-align:center;">Panel administracyjny </h1>
 
-    <div  class="text-justify" ><h1 style="margin-top:200px; test-align:center;">Panel administracyjny </h1></div>
+    <form action="/szukaj" method="post">
+        <div class="form-group">
+            <label for="user">nazwa użytkownika</label>
+            <input type="text" name="username" class="form-control" id="user"  placeholder="Wpisz login użytkownika"/>
+        </div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <input type="submit" value="znajdź">
+
+    </form>
+
 
 
 
