@@ -18,7 +18,8 @@
 </head>
 
 <body>
-<ul th:include="menu :: menu" class="navbar navbar-default"></ul>
+<ul th:if="${zalogowany}" th:include="menu :: menu1"  class="navbar navbar-default"></ul>
+<ul th:unless="${zalogowany}" th:include="menu :: menu"  class="navbar navbar-default"></ul>
 <div  class="container">
 
     <div  class="text-justify" >

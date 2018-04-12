@@ -1,6 +1,7 @@
 package com.example.zaj261;
 
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,9 @@ public class HomeController {
 
   @GetMapping("/")
     public String main (){
+
+
+
     return "wszyscy/index";
 
     }
@@ -39,7 +43,7 @@ public class HomeController {
 
     }
 
-    @PostMapping("/logowanie")
+    @PostMapping("/login")
     public String logowanie (Model model, Principal principal){
             String login=principal.getName();
             User user=userRepository.findByUsername(login);
@@ -74,7 +78,10 @@ public class HomeController {
 
     }
     @GetMapping("/kontakt")
-    public String kontakt () {
+    public String kontakt (Model model, Principal principal) {
+        boolean zalogowany=false;
+        if (principal!=null) zalogowany=true;
+        model.addAttribute("zalogowany", zalogowany);
         return "/wszyscy/kontakt";
     }
 
