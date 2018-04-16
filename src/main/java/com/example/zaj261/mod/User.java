@@ -1,4 +1,4 @@
-package com.example.zaj261;
+package com.example.zaj261.mod;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,6 +17,9 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private String img;
+
+
 
     @OneToMany(mappedBy = "id")
     private List<User> friends;
@@ -33,6 +36,13 @@ public class User {
         return email;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
     public void setEmail(String email) {
         this.email = email;
     }

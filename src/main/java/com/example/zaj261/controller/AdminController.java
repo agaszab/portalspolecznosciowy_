@@ -1,5 +1,7 @@
-package com.example.zaj261;
+package com.example.zaj261.controller;
 
+import com.example.zaj261.mod.User;
+import com.example.zaj261.repository.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

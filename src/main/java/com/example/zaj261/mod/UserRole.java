@@ -1,4 +1,4 @@
-package com.example.zaj261;
+package com.example.zaj261.mod;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

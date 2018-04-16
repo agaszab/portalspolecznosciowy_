@@ -19,14 +19,12 @@
 
 <body>
 <ul th:include="menu :: menu1" class="navbar navbar-default"></ul>
-<div  class="container" th:object="${user}">
+<div  class="container">
 
-    <div  class="text-justify" ><h1 th:text="'Profil użytkownika: '+*{username}" style="margin-top:200px; test-align:center;">  </h1></div>
-    <p th:text="'Imię: '+*{firstName}"></p>
-    <p th:text="'Nazwisko: '+*{lastName}"></p>
-    <p th:text="'E-mail: '+*{email}"></p>
-    <p> Zdjęcie profilowe:  <img  th:src="*{img}" width="30"></p>
-    <a th:if="${doProfilu}" th:href="'/edycja?id='+*{id}"><button type="submit" class="btn btn-primary" >Edytuj moje dane</button></a>
+    <div  class="text-justify" ><h1 style="margin-top:200px; test-align:center;">Nie znaleziono użytkownika o takim loginie!  </h1></div>
+
+    </br><a href="javascript:history.back()"><< powrót do poprzedniej strony</a>
+
 </div>
 
 
