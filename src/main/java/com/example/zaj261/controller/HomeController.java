@@ -4,6 +4,7 @@ package com.example.zaj261.controller;
 import com.example.zaj261.mod.User;
 import com.example.zaj261.repository.UserRepository;
 import com.example.zaj261.repository.UserRoleRepository;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,12 +77,15 @@ public class HomeController {
 
     @PostMapping("/register")
     public String register(User user) {
-        if (!user.getUsername().equals("") && !user.getPassword().equals("")) {
+        if (!user.getUsername().equals("") && !user.getPassword().equals("")&& !user.getEmail().equals("")) {
             user.setEnabled(false);
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String encode = encoder.encode(user.getPassword());
+            user.setPassword(encode);
             userRepository.save(user);
             return "wszyscy/zarejestrowany";
         }
-        return "error";
+        return "brakdanych";
     }
 
     @GetMapping("/kontakt")
