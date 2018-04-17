@@ -20,10 +20,8 @@ public class User {
     private String img;
 
 
-
     @OneToMany(mappedBy = "id")
     private List<User> friends;
-
 
     public Long getId() {
         return id;
@@ -32,20 +30,7 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getEmail() {
-        return email;
-    }
 
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
     public String getUsername() {
         return username;
     }
@@ -84,6 +69,22 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public List<User> getFriends() {

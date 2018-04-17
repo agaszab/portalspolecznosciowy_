@@ -73,27 +73,31 @@
         <li><a href="/lindex">Portal społocznościowy</a></li>
         <li><a href="/szukaj">Wyszukaj użytkownika</a></li>
         <li><a href="/zapros">Zaproś znajomych</a></li>
-        <li><a href="/profil">Twój profilt</a></li>
+        <li><a href="/profil">Twój profil</a></li>
         <li><a href="/moiznajomi">Lista Twoich znajomych</a></li>
         <li><a href="/kontakt">Kontakt z adminem</a></li>
+        <li><a href="/admin">Admin</a></li>
         <li><a href="/wyloguj">Wyloguj się</a></li>
     </ul>
 </div>
 
 <div> // dla admina
     <ul th:fragment="menu2">
-        <li><a href="/panel/admin">Panel administracyjny portalu</a></li>
-        <li><a href="/panel/users">Lista użytkowników</a></li>
+        <li><a href="/admin">Panel administratora portalu</a></li>
+        <li><a href="/panel/users?a=true">Lista użytkowników aktywnych</a></li>
         <li><a href="/panel/szukaj">Wyszukaj użytkownika</a></li>
-        <li><a href="/panel/doakceptacji">Lista oczekujących na akceptację</a></li>
-        <li><a href="/ppanel/profil">Twój profilt</a></li>
+        <li><a href="/panel/users?a=false">Lista oczekujących na aktywację</a></li>
+        <li><a href="/panel/profil">Twój profilt</a></li>
         <li><a href="/wyloguj">Wyloguj się</a></li>
     </ul>
 </div>
 
 <div th:fragment="iko_users">
-    <a  style="display: inline;  float: left" title="edycja danych użytkownika" th:href="'panel/eduser?id='+${user.id}"><img src="../edit.png" width="20px"></a>
-    <a style="display: inline; float: right" title="skasuj użytkownika" th:href="'panel/deluser?id='+${user.id}"><img src="../delete.png" width="20px"></a>
+    <a  style="display: inline;  float: left" title="edycja danych użytkownika" th:href="'/panel/eduser?id='+${user.id}"><img src="../edit.png" width="20px"></a>
+    <a style="display: inline; float: right" title="skasuj użytkownika" th:href="'/deluser?id='+${user.id}"><img src="../delete.png" width="20px"></a>
+</div>
+<div th:fragment="iko_aktywacja">
+    <input type="hidden" th:name="id" th:value="${user.id}"><input type="checkbox" name="enabled" th:checked="${user.enabled}" /> aktywacja
 </div>
 
 </body>
