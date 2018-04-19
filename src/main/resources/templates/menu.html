@@ -9,7 +9,7 @@
 <div>
     <style  th:fragment="styl">
         body{
-            background-color: #FFFDD7;
+            background-color: #f0fcd7;
             align-content: center;
         }
         h1{margin-top: 30px;}
@@ -22,7 +22,7 @@
         }
         .container ul li a {
             background-color: #FFF;
-            color: #333;
+            color: #133814;
             text-align: left;
             height: 25px;
         }
@@ -32,7 +32,7 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #333;
+            background-color: #142b1a;
             text-align: left;
         }
 
@@ -50,18 +50,20 @@
         }
 
         li a:hover {
-            background-color: #111;
-            text-underline: #dbfccb;
-            color: #c4f5c5;
+            background-color: #142b1a;
+            text-underline: #dfffc3;
+            color: #d2f5ca;
 
         }
+        .left {display: inline;  float: left}
+        .right {display: inline;  float: right}
     </style>
 </div>
 
 
 <div>  // dla niezalogowanych
     <ul th:fragment="menu">
-        <li><a href="/">Portal społocznościowy</a></li>
+        <li><img class="left" src="../meet.jpg" width="70px"/><a class="right" href="/">Portal społocznościowy</a></li>
         <li><a href="/login">Logowanie</a></li>
         <li><a href="/rejestracja">Rejestracja</a></li>
         <li><a href="/kontakt">Kontakt z adminem</a></li>
@@ -70,11 +72,11 @@
 
 <div> // dla zalogowanych
     <ul th:fragment="menu1">
-        <li><a href="/lindex">Portal społocznościowy</a></li>
-        <li><a href="/szukaj">Wyszukaj użytkownika</a></li>
-        <li><a href="/zapros">Zaproś znajomych</a></li>
-        <li><a href="/profil">Twój profil</a></li>
+        <li><img class="left" src="../meet.jpg" width="70px"/><a class="right" href="/lindex">Portal społocznościowy</a></li>
+        <li><a href="/profil?doProfilu=3">Twój profil</a></li>
         <li><a href="/moiznajomi">Lista Twoich znajomych</a></li>
+        <li><a href="/zaproszenia">Osoby zapraszające Cię do grona znajomych</a></li>
+        <li><a href="/szukaj">Wyszukaj użytkownika</a></li>
         <li><a href="/kontakt">Kontakt z adminem</a></li>
         <li><a href="/admin">Admin</a></li>
         <li><a href="/wyloguj">Wyloguj się</a></li>
@@ -83,22 +85,21 @@
 
 <div> // dla admina
     <ul th:fragment="menu2">
-        <li><a href="/admin">Panel administratora portalu</a></li>
+        <li><img src="../meet.jpg" width="70px" class="left"/><a href="/admin" class="right">Panel administratora portalu</a></li>
         <li><a href="/panel/users?a=true">Lista użytkowników aktywnych</a></li>
         <li><a href="/panel/szukaj">Wyszukaj użytkownika</a></li>
         <li><a href="/panel/users?a=false">Lista oczekujących na aktywację</a></li>
-        <li><a href="/panel/profil">Twój profilt</a></li>
+        <li><a href="/profil?doProfilu=1">Twój profil</a></li>
         <li><a href="/wyloguj">Wyloguj się</a></li>
     </ul>
 </div>
 
 <div th:fragment="iko_users">
-    <a  style="display: inline;  float: left" title="edycja danych użytkownika" th:href="'/panel/eduser?id='+${user.id}"><img src="../edit.png" width="20px"></a>
-    <a style="display: inline; float: right" title="skasuj użytkownika" th:href="'/deluser?id='+${user.id}"><img src="../delete.png" width="20px"></a>
+    <a  class="left" title="edycja danych użytkownika" th:href="'/panel/eduser?id='+${user.id}"><img src="../edit.png" width="20px"></a>
+    <a class="right" title="skasuj użytkownika" th:href="'/deluser?id='+${user.id}"><img src="../delete.png" width="20px"></a>
 </div>
-<div th:fragment="iko_aktywacja">
-    <input type="hidden" th:name="id" th:value="${user.id}"><input type="checkbox" name="enabled" th:checked="${user.enabled}" /> aktywacja
-</div>
+
+
 
 </body>
 </html>

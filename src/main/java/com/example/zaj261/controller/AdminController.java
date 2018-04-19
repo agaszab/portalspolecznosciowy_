@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +39,7 @@ public class AdminController {
     public String wyszukaj(Model model, @RequestParam String username) {
         User user = userRepository.findByUsername(username);
         model.addAttribute("user", user);
-        return "panel/user";
+        return "panel/user?doProfilu=1";
     }
 
     @GetMapping("/panel/user")
@@ -47,11 +49,25 @@ public class AdminController {
         return "panel/user";
     }
 
+    @GetMapping("/user")
+    public String dane(Model model, @RequestParam long id) {
+        User user = userRepository.findById(id);
+        model.addAttribute("user", user);
+        return "panel/user";
+    }
+
     @GetMapping("/panel/users")
-    public String users(Model model, @RequestParam boolean a) {
-        List<User> users;
-        if (a) users = userRepository.findUsersByEnabledIsTrue();
-         else users=userRepository.findUsersByEnabledIsFalse();
+    public String users(Model model, @RequestParam boolean a) { // a -  zmienna pomocnicza by załadować userówa aktywnych lub nieaktywnych
+
+        List<User> users= new ArrayList<>();
+
+        if (a) {  // aktywni
+            users = userRepository.findUsersByEnabledIsTrue();
+        }
+         else {  // nieaktywni
+            users=userRepository.findUsersByEnabledIsFalse();
+        }
+
         model.addAttribute("users", users);
         model.addAttribute("a", a);
         return "panel/users";
@@ -61,10 +77,9 @@ public class AdminController {
     @PostMapping("/panel/edit")
     public String edituser (User user,  @RequestParam long id){
 
-        Optional<User> userOptional = userRepository.findById(id);
+        User newUser = userRepository.findById(id);
 
-        if (userOptional.isPresent()) {
-            User newUser = userOptional.get();
+        if (newUser!=null) {
             if (!user.getFirstName().equals("")) {
                 newUser.setFirstName(user.getFirstName());
             }
@@ -78,19 +93,23 @@ public class AdminController {
             newUser.setEnabled(user.isEnabled());
             userRepository.save(newUser);
         }
-        return "redirect:/panel/user";
+        return "redirect:/panel/users?a=true";
     }
 
     @PostMapping("/aktywacja")
-            public String aktywacja (User user,  @RequestParam long id){
+            public String aktywacja ( List<User> users){   // aktywacja tych z listy co zaznaczeni
 
-        Optional<User> userOptional = userRepository.findById(id);
-
-        if (userOptional.isPresent()) {
-            User newUser = userOptional.get();
-            newUser.setEnabled(user.isEnabled());
-            userRepository.save(newUser);
+        for (User us:users) {
+            if (us.isEnabled()){
+                Optional<User> userOptional = userRepository.findById(us.getId());
+                if (userOptional.isPresent()) {
+                    User newUser = userOptional.get();
+                    newUser.setEnabled(true);
+                    userRepository.save(newUser);
+                }
+            }
         }
+
         return "redirect:/panel/users?a=true";
     }
 

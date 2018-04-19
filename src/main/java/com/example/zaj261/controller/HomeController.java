@@ -2,6 +2,7 @@ package com.example.zaj261.controller;
 
 
 import com.example.zaj261.mod.User;
+import com.example.zaj261.repository.FriendsRepository;
 import com.example.zaj261.repository.UserRepository;
 import com.example.zaj261.repository.UserRoleRepository;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -19,6 +20,7 @@ public class HomeController {
 
     private UserRepository userRepository;
     private UserRoleRepository userRoleRepository;
+
 
     public HomeController(UserRepository userRepository, UserRoleRepository userRoleRepository) {
         this.userRepository = userRepository;
@@ -49,7 +51,7 @@ public class HomeController {
         User user = userRepository.findByUsername(login);
         if (user != null) {
             model.addAttribute("user", user);
-            return "redirect:/lindex";
+            return "/zalogowani/lindex";
         } else return "wszyscy/login";
 
     }

@@ -17,11 +17,12 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    @Lob // pole większe niż zwykły varchar(255) czyli typu text
     private String img;
 
-
-    @OneToMany(mappedBy = "id")
-    private List<User> friends;
+    @OneToMany
+    @JoinColumn(name = "uid", referencedColumnName = "id")
+    private List<Friends> friends;
 
     public Long getId() {
         return id;
@@ -87,11 +88,13 @@ public class User {
         this.img = img;
     }
 
-    public List<User> getFriends() {
+    public List<Friends> getFriends() {
         return friends;
     }
 
-    public void setFriends(List<User> friends) {
+    public void setFriends(List<Friends> friends) {
         this.friends = friends;
     }
+
+
 }

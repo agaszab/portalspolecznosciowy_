@@ -27,13 +27,12 @@
 
 
     <!-- fragment aktywny przy wyborze >>>>>  tylko aktywni -->
-    <spam th:is="${a}">
+    <spam th:if="${a}">
     <ul class="list-group">
 
         <li class="list-group-item" th:each="user: ${users}">
-            <a style="display: inline; float: left" th:href="'panel/user?id='+${user.id}"   th:text="${user.lastName} +' '+${user.firstName}"></a>
+            <a style="display: inline; float: left" th:href="'/user?id='+${user.id}"   th:text="${user.lastName} +' '+${user.firstName}"></a>
             <span style="display: inline; float: right" th:if="${a}"  th:include="menu :: iko_users" class="navbar navbar-default"></span>
-            <span style="display: inline; float: right" th:unless="${a}"  th:include="menu :: iko_aktywacja" class="navbar navbar-default"></span>
         </li>
 
     </ul>
@@ -47,13 +46,17 @@
     <form action="/aktywacja" method="post">
         <ul class="list-group">
 
-            <li class="list-group-item" th:each="user: ${users}">
-                <a style="display: inline; float: left" th:href="'panel/user?id='+${user.id}"   th:text="${user.lastName} +' '+${user.firstName}"></a>
-                <span style="display: inline; float: right"  th:include="menu :: iko_aktywacja" class="navbar navbar-default"></span>
+            <li class="list-group-item" th:each="user: ${users}" th:object="${user}">
+                <a style="display: inline; float: left; vertical-align:top;" th:href="'/user?id='+*{id}"   th:text="*{lastName} +' '+*{firstName}+' login ('+*{username}+')'"></a>
+                <span style="display: inline; float: right; vertical-align:top;">
+                    <input type="hidden" th:name="id" th:value="*{id}" />
+                    <input type="checkbox" th:value="*{enabled}" th:checked="*{enabled}" /> aktywacja
+                </span>
+
             </li>
 
         </ul>
-        <button type="button" class="btn btn-primary btn-xs">aktualizuj</button>
+    </br><button type="submit" class="btn btn-primary btn-xs">aktualizuj</button>
     </form>
 
 </spam>

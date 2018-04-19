@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+
+    public User findById(long id);
+
     public User findByUsername(String username);
     public List<User> findUsersByEnabledIsTrue();
     public List<User> findUsersByEnabledIsFalse();

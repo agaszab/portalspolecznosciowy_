@@ -12,3 +12,4 @@ insert into user_role (username, role) values ('kasia', 'ROLE_USER');
 insert into user_role (username, role) values ('basia', 'ROLE_USER');
 insert into user_role (username, role) values ('asia', 'ROLE_USER');
 
+
