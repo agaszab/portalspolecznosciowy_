@@ -32,7 +32,7 @@ public class UserController {
     public String zaprosenia (Model model, Principal principal){
         User user=zalogowany(principal);
         List <Friends> friends;
-        friends=friendsRepository.findById_friendAndFriendFalse(user.getId());
+        friends=friendsRepository.findByFriendIdAndFriendFalse(user.getId());
         if (friends.size()>0) {
             model.addAttribute("friends", friends);
             return "zalogowani/zaproszenia?t=1";
@@ -104,7 +104,7 @@ public class UserController {
          User ufriend=userRepository.findById(zid);
          Friends friends=new Friends();
          friends.setUid(loginUser.getId());
-         friends.setId_friend(zid);
+         friends.setFriendId(zid);
          friends.setFriendname(ufriend.getUsername());
          friends.setFriend(false);
          friendsRepository.save(friends);
