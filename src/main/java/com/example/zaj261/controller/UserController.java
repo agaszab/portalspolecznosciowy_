@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -28,50 +29,69 @@ public class UserController {
 
     }
 
-    @GetMapping("/zaproszenia")
-    public String zaprosenia (Model model, Principal principal){
-        User user=zalogowany(principal);
-        List <Friends> friends;
-        friends=friendsRepository.findById_friendAndFriendFalse(user.getId());
-        if (friends.size()>0) {
-            model.addAttribute("friends", friends);
-            return "zalogowani/zaproszenia?t=1";
-        } else  return "zalogowani/zaproszenia?t=0";
 
 
+    @GetMapping("/users")
+    public String listusers(Model model) {
+
+        List<User> users= new ArrayList<>();
+        users = userRepository.findUsersByEnabledIsTrue();
+        model.addAttribute("users", users);
+        return "zalogowani/users";
     }
 
-    @PostMapping ("/akceptuj")
-    public String akceptuj(List<User> users, Principal principal){
+    @GetMapping("/lindex")
+    public String glowna() {
 
+        return "zalogowani/lindex";
+    }
 
+    @GetMapping ("/akceptuj")
+    public String akceptuj(@RequestParam long id){
 
+        Friends fr=friendsRepository.findById(id);
+        fr.setFriend(true);
+        friendsRepository.save(fr);
+     return "redirect:/zaproszenia";
+    }
 
-        return "zalogowani/znajomi";
+    @GetMapping ("/odrzuc")
+    public String odrzuc(@RequestParam long id){
+        Friends fr=friendsRepository.findById(id);
+        friendsRepository.delete(fr);
+        return "redirect:/zaproszenia";
     }
 
     @GetMapping("/moiznajomi")
-    public String moiznajomi (){
-        return "zalogowani/login";
+    public String moiznajomi (Model model, Principal principal){
 
+        User zalogowany=zalogowany(principal);
+        List <Friends> friends;
+        int t=0;
+        friends=friendsRepository.findByUidAndFriendTrue(zalogowany.getId());
+
+        if (friends.size()>0) {
+            t=1;
+            model.addAttribute("t", t);
+            model.addAttribute("friends", friends);
+            return "zalogowani/znajomi";
+        } else {
+            model.addAttribute("t", t);
+            return "zalogowani/znajomi";
+        }
     }
 
-   /* @GetMapping("/profil")
-    public String profil (Model model, Principal principal, @RequestParam int doProfilu){
 
-        String login=principal.getName();
-        User user=userRepository.findByUsername(login);
-        if(user!=null) {
-            model.addAttribute("doProfilu", doProfilu);
-            model.addAttribute("user", user);
-            return "zalogowani/profil";
-        } else return "/login";
+    @GetMapping("/delfriend")
+    public String delfriend (@RequestParam long id){
+        Friends fr=friendsRepository.findById(id);
+        friendsRepository.delete(fr);
+        return "redirect:/moiznajomi";
+    }
 
-    } */
 
     @GetMapping("/profil")
     public String profil (Model model, Principal principal, @RequestParam int doProfilu){
-
         User user=zalogowany(principal);
         if(user!=null) {
             model.addAttribute("doProfilu", doProfilu);
@@ -80,16 +100,29 @@ public class UserController {
         } else return "/login";
 
     }
+
+
+    @GetMapping("/profiluser")
+    public String profilusera (Model model, @RequestParam long id, @RequestParam int doProfilu){
+        User user=userRepository.findById(id);
+        if(user!=null) {
+            model.addAttribute("doProfilu", doProfilu);
+            model.addAttribute("user", user);
+            return "zalogowani/profil";
+        } else return "/login";
+
+    }
+
 
     @GetMapping("/szukaj")
     public String szukaj () {
             return "zalogowani/szukaj";
-
     }
+
 
     @PostMapping("/szukaj")
     public String pokazszukane (Model model, @RequestParam  String username) {
-        User user= userRepository.findByUsername(username);
+        User user= userRepository.findByUsernameAndEnabledTrue(username);
         int doProfilu=2;
         if (user!=null) {
             model.addAttribute("user", user);
@@ -98,13 +131,33 @@ public class UserController {
         } else return "zalogowani/nouser";
     }
 
-    @GetMapping("/zaproszenie")
+
+    @GetMapping("/zaproszenia")
+    public String zaprosenia (Model model, Principal principal){
+        User zalogowany=zalogowany(principal);
+        List <Friends> friends;
+        int t=0;
+        friends=friendsRepository.findByFidAndFriendFalse(zalogowany.getId());
+        if (friends.size()>0) {
+            t=1;
+            model.addAttribute("t", t);
+            model.addAttribute("friends", friends);
+            return "zalogowani/zaproszenia";
+        } else {
+            model.addAttribute("t", t);
+            return "zalogowani/zaproszenia";
+        }
+
+    }
+
+
+    @PostMapping("/zaproszenie")
     public String zapros (Principal principal, @RequestParam long zid) {
          User loginUser=zalogowany(principal);
          User ufriend=userRepository.findById(zid);
          Friends friends=new Friends();
          friends.setUid(loginUser.getId());
-         friends.setId_friend(zid);
+         friends.setfid(zid);
          friends.setFriendname(ufriend.getUsername());
          friends.setFriend(false);
          friendsRepository.save(friends);
