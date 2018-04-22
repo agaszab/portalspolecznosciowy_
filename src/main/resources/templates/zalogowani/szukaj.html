@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8"/>
     <title>Portal społecznościowy</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
@@ -16,30 +16,30 @@
             crossorigin="anonymous"></script>
     <style th:include="menu::styl"></style>
 </head>
-
 <body>
 <ul th:include="menu :: menu1" class="navbar navbar-default"></ul>
-<div  class="container">
 
-    <div  class="text-justify" ><h1 style="margin-top:200px; test-align:center;">Wyszukiwanie użytkownika </h1>
-        <form action="/szukaj" method="post">
 
-            <div class="form-group">
-                <label for="user">Nazwa użytkownika</label>
-                <input type="text" name="username" class="form-control" id="user"  placeholder="Wpisz login użytkownika"/>
-            </div>
+<div class="container">
 
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-            <input type="submit" value="szukaj">
+    <div class="text-justify"><h1>Wyszukiwanie użytkownika</h1>
+        <div class="op border border-white rounded">
+            <form action="/szukaj" method="post">
 
-        </form>
+                <div class="form-group">
+                    <label for="user">Nazwa użytkownika</label>
+                    <input type="text" name="username" class="form-control" id="user"  placeholder="Wpisz login użytkownika"/>
+                </div>
 
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <input type="submit" value="szukaj">
+
+            </form>
+
+
+        </div>
     </div>
 
-
-
 </div>
-
-
 </body>
 </html>

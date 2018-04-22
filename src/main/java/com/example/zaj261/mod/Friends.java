@@ -9,9 +9,10 @@ public class Friends {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private  long id;
 
- private  long id_friend;
+ private  long fid;
  private  long uid;
  private  String friendname;
+ private  String invitedname;
  private  boolean friend;
 
     public long getId() {
@@ -22,16 +23,32 @@ private  long id;
         this.id = id;
     }
 
-    public long getId_friend() {
-        return id_friend;
+    public long getfid() {
+        return fid;
     }
 
-    public void setId_friend(long id_friend) {
-        this.id_friend = id_friend;
+    public void setfid(long fid) {
+        this.fid = fid;
     }
 
     public long getUid() {
         return uid;
+    }
+
+    public long getFid() {
+        return fid;
+    }
+
+    public void setFid(long fid) {
+        this.fid = fid;
+    }
+
+    public String getInvitedname() {
+        return invitedname;
+    }
+
+    public void setInvitedname(String invitedname) {
+        this.invitedname = invitedname;
     }
 
     public void setUid(long uid) {
@@ -58,7 +75,7 @@ private  long id;
     public String toString() {
         return "Friends{" +
                 "id=" + id +
-                ", id_friend=" + id_friend +
+                ", fid=" + fid +
                 ", uid=" + uid +
                 ", friendname='" + friendname + '\'' +
                 ", friend=" + friend +

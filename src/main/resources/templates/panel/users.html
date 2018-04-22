@@ -24,7 +24,7 @@
 
     <h1 style="margin-top:200px; test-align:center;">Panel administracyjny </h1>
 
-
+    <div class="op border border-white rounded">
 
     <!-- fragment aktywny przy wyborze >>>>>  tylko aktywni -->
     <spam th:if="${a}">
@@ -43,25 +43,21 @@
 
     <!-- fragment aktywny przy wyborze >>>>>   tylko nieaktywni -->
 <spam th:unless="${a}">
-    <form action="/aktywacja" method="post">
-        <ul class="list-group">
+    <ul class="list-group">
 
-            <li class="list-group-item" th:each="user: ${users}" th:object="${user}">
-                <a style="display: inline; float: left; vertical-align:top;" th:href="'/user?id='+*{id}"   th:text="*{lastName} +' '+*{firstName}+' login ('+*{username}+')'"></a>
-                <span style="display: inline; float: right; vertical-align:top;">
-                    <input type="hidden" th:name="id" th:value="*{id}" />
-                    <input type="checkbox" th:value="*{enabled}" th:checked="*{enabled}" /> aktywacja
+        <li class="list-group-item" th:each="user: ${users}" th:object="${user}">
+            <a style="display: inline; float: left; vertical-align:top;" th:href="'/user?id='+*{id}"   th:text="*{lastName}+' '+*{firstName}+' login ('+*{username}+')'"></a>
+            <span style="display: inline; float: right; vertical-align:top;">
+                    <a th:href="'/aktywacja?id='+*{id}">aktywacja</a>
                 </span>
 
-            </li>
+        </li>
 
-        </ul>
-    </br><button type="submit" class="btn btn-primary btn-xs">aktualizuj</button>
-    </form>
+    </ul>
 
 </spam>
     <!-- end nieaktywni -->
-
+    </div>
 </div>
 
 

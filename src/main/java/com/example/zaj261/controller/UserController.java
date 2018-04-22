@@ -151,14 +151,17 @@ public class UserController {
     }
 
 
-    @PostMapping("/zaproszenie")
+    @GetMapping("/zaproszenie")
     public String zapros (Principal principal, @RequestParam long zid) {
+
          User loginUser=zalogowany(principal);
          User ufriend=userRepository.findById(zid);
+
          Friends friends=new Friends();
          friends.setUid(loginUser.getId());
          friends.setfid(zid);
          friends.setFriendname(ufriend.getUsername());
+         friends.setInvitedname(loginUser.getUsername());
          friends.setFriend(false);
          friendsRepository.save(friends);
          return "zalogowani/zaproszenie";

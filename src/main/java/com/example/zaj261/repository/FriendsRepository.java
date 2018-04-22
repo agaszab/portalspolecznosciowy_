@@ -7,9 +7,13 @@ import java.util.List;
 
 public interface FriendsRepository extends JpaRepository<Friends, Long> {
 
- public List<Friends> findAllById_friendFriendFalse(long id);
 
- public List<Friends> findById_friendAndFriendFalse(long id);
+    List<Friends> findByFidAndFriendFalse(long id);
 
- public List<Friends> findAllById_friendFriendTrue(long id);
+    List<Friends> findByUidAndFriendTrue(long id);
+
+    Friends findById(long id);
+
+    List<Friends> findAllByUidAndFriendTrue(long id);
+
 }

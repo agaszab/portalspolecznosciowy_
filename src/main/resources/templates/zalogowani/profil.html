@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Portal społecznościowy</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
@@ -18,16 +19,24 @@
 </head>
 
 <body>
-<ul th:include="menu :: menu1" class="navbar navbar-default"></ul>
-<div  class="container" th:object="${user}">
+<ul th:unless="${doProfilu==1}" th:include="menu :: menu1" class="navbar navbar-default"></ul>
+<ul th:if="${doProfilu==1}" th:include="menu :: menu2" class="navbar navbar-default"></ul>
+<div class="container" th:object="${user}">
 
-    <div  class="text-justify" ><h1 th:text="'Profil użytkownika: '+*{username}" style="margin-top:200px; test-align:center;">  </h1></div>
-    <p th:text="'Imię: '+*{firstName}"></p>
-    <p th:text="'Nazwisko: '+*{lastName}"></p>
-    <p th:text="'E-mail: '+*{email}"></p>
-    <p> Zdjęcie profilowe:  <img  th:src="*{img}" width="100"></p>
-    <a th:if="${doProfilu==3 || doProfilu==1}" th:href="'/edycja?id='+*{id}"><button type="submit" class="btn btn-primary" >Edytuj dane</button></a>
-    <a th:if="${doProfilu==2}" th:href="'/zaproszenie?zid='+*{id}" style="margin-left:30px;"><button type="submit" class="btn btn-primary" >Zaproś do znajomych</button></a>
+    <div class="text-justify"><h1 th:text="'Profil użytkownika: '+*{username}"
+                                  style="margin-top:200px; test-align:center;"></h1></div>
+    <div class="op border border-white rounded">
+        <p th:text="'Imię: '+*{firstName}"></p>
+        <p th:text="'Nazwisko: '+*{lastName}"></p>
+        <p th:text="'E-mail: '+*{email}"></p>
+        <p> Zdjęcie profilowe: <img th:src="*{img}" width="100"></p>
+        <a th:if="${doProfilu==3 || doProfilu==1}" th:href="'/edycja?id='+*{id}">
+            <button type="submit" class="btn btn-primary">Edytuj dane</button>
+        </a>
+        <a th:if="${doProfilu==2}" th:href="'/zaproszenie?zid='+*{id}" style="margin-left:30px;">
+            <button type="submit" class="btn btn-primary">Zaproś do znajomych</button>
+        </a>
+    </div>
 </div>
 
 

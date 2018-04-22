@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Portal społecznościowy</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
@@ -19,30 +20,31 @@
 
 <body>
 <ul th:include="menu :: menu1" class="navbar navbar-default"></ul>
-<div  class="container">
+<div class="container">
 
 
     <h1 style="margin-top:200px; test-align:center;" th:if="${t}==1">Osoby oczekujące na zaproszenie.</h1>
     <h1 style="margin-top:200px; test-align:center;" th:if="${t}==0">Obecnie nie masz nowych zaproszeń</h1>
+    <div class="op border border-white rounded">
 
+        <!-- lista oczekujących -->
+        <spam th:if="${t}==1">
 
-    <!-- lista oczekujących -->
-    <spam th:if="${t}==1">
-        <form action="/akceptuj" method="post">
-        <ul class="list-group">
+            <ul class="list-group">
 
-            <li class="list-group-item" th:each="fr: ${friends}">
-                <a style="display: inline; float: left" th:href="'/user?id='+${fr.uid}"   th:text="${fr.friendname}"></a>
-                <span style="display: inline; float: right; vertical-align:top;">
-                    <input type="hidden" th:name="id" th:value="*{id}" />
-                    <input type="checkbox" th:value="*{fr.friend}" th:checked="*{fr.friend}" /> akceptuj (zaznacz okienko)
-                </span>
-            </li>
+                <li class="list-group-item" th:each="fr: ${friends}">
+                    <a style="display: inline; float: left" th:href="'/profiluser?id='+${fr.uid}+'&doProfilu=4'"
+                       th:text="${fr.invitedname}"></a>
+                    <span style="display: inline; float: right; vertical-align:top;">
+                   <a th:href="'/akceptuj?id='+${fr.id}" th:text="'akceptuj'" > akceptuj</a>
+                   <a th:href="'/odrzuc?id='+${fr.id}" th:text="'odrzuć'"> odrzuć </a>
+                    </span>
+                </li>
 
-        </ul>
-            </br><button type="submit" class="btn btn-primary btn-xs">aktualizuj</button>
-        </form>
-    </spam>
+            </ul>
+
+        </spam>
+    </div>
     <!-- end oczekujący -->
 
 

@@ -20,9 +20,13 @@ public class User {
     @Lob // pole większe niż zwykły varchar(255) czyli typu text
     private String img;
 
-    @OneToMany
-    @JoinColumn(name = "uid", referencedColumnName = "id")
-    private List<Friends> friends;
+   // @OneToMany
+  //  @JoinColumn(name = "id", referencedColumnName = "id")
+  //  private List<Friends> friends;
+
+  //  @OneToMany
+  //  @JoinColumn(name = "id", referencedColumnName = "id")
+  //  private List<Friends> invited;
 
     public Long getId() {
         return id;
@@ -31,6 +35,14 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
+
+ //   public List<Friends> getInvited() {
+ //       return invited;
+ //   }
+
+ //   public void setInvited(List<Friends> invited) {
+ //       this.invited = invited;
+ //   }
 
     public String getUsername() {
         return username;
@@ -64,6 +76,7 @@ public class User {
         this.firstName = firstName;
     }
 
+
     public String getLastName() {
         return lastName;
     }
@@ -88,13 +101,13 @@ public class User {
         this.img = img;
     }
 
-    public List<Friends> getFriends() {
-        return friends;
-    }
+  //  public List<Friends> getFriends() {
+  //      return friends;
+  //  }
 
-    public void setFriends(List<Friends> friends) {
-        this.friends = friends;
-    }
+  //  public void setFriends(List<Friends> friends) {
+ //       this.friends = friends;
+ //   }
 
 
 }

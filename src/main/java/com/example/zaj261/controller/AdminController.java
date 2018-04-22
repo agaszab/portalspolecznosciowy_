@@ -38,8 +38,10 @@ public class AdminController {
     @PostMapping("/panel/szukaj")
     public String wyszukaj(Model model, @RequestParam String username) {
         User user = userRepository.findByUsername(username);
+        int doProfilu=1;
         model.addAttribute("user", user);
-        return "panel/user?doProfilu=1";
+        model.addAttribute("doProfilu", doProfilu);
+        return "panel/user";
     }
 
     @GetMapping("/panel/user")
@@ -96,20 +98,12 @@ public class AdminController {
         return "redirect:/panel/users?a=true";
     }
 
-    @PostMapping("/aktywacja")
-            public String aktywacja ( List<User> users){   // aktywacja tych z listy co zaznaczeni
+    @GetMapping("/aktywacja")
+            public String aktywacja ( @RequestParam long id){   // aktywacja tych z listy co zaznaczeni
 
-        for (User us:users) {
-            if (us.isEnabled()){
-                Optional<User> userOptional = userRepository.findById(us.getId());
-                if (userOptional.isPresent()) {
-                    User newUser = userOptional.get();
-                    newUser.setEnabled(true);
-                    userRepository.save(newUser);
-                }
-            }
-        }
-
+        User user = userRepository.findById(id);
+        user.setEnabled(true);
+        userRepository.save(user);
         return "redirect:/panel/users?a=true";
     }
 
@@ -125,15 +119,14 @@ public class AdminController {
     }
 
 
-    @GetMapping("/deluser")
-    public String kasujosobe(@RequestParam Long id) {
-
-        Optional<User> userOptional = userRepository.findById(id);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            userRepository.delete(user);
-        }
-        return "redirect:panel/users";
+    @GetMapping("panel/deluser")
+    public String kasujosobe(Model model, @RequestParam long id) {
+        User user = userRepository.findById(id);
+        if (user!=null && !user.getUsername().equals("admin"))
+        userRepository.delete(user);
+        boolean a=true;
+        model.addAttribute("a", a);
+        return "redirect:users?a=true";
     }
 }
 

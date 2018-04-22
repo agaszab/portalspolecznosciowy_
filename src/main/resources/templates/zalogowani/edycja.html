@@ -16,7 +16,7 @@
 <div  class="container">
 
     <div  class="text-justify" ><h1>Edytuj swoje dane</h1>
-
+        <div class="op border border-white rounded">
         <form action="/edit" method="post" th:object="${user}">
             <input type="hidden" name="id" th:field="*{id}">
             <div class="form-group">
@@ -38,7 +38,7 @@
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             <button type="submit" class="btn btn-primary">Zatwierdź zmiany</button>
         </form>
-
+        </div>
     </div>
 
 </div>

@@ -6,25 +6,53 @@
     <meta charset="UTF-8">
 </head>
 <body>
+
+
+<div th:fragment="gora">
+    <a  class="left" title="edycja danych użytkownika" th:href="'/panel/eduser?id='+${user.id}"><img src="../edit.png" width="20px"></a>
+    <a class="right" title="skasuj użytkownika" th:href="'/deluser?id='+${user.id}"><img src="../delete.png" width="20px"></a>
+</div>
+
+
+
+
+
+
 <div>
     <style  th:fragment="styl">
         body{
             background-color: #f0fcd7;
-            align-content: center;
+            align-content: center ;
+            background-image: url("bg1.jpg");
+            background-position: cover;
+            opacity: 0.9;
+            background-repeat: no-repeat;
         }
         h1{margin-top: 30px;}
         h2{margin-top: 20px;}
 
+        .op {
+            padding: 20px;
+            background-color: #c2f79b;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+            margin: 0 100px;
+            width: 60%;
+        }
+        .container {
+            alignment: top;
+
+        }
         .container ul {
             background-color: #FFF;
             width: 600px;
-
+            opacity: 0.7;
         }
         .container ul li a {
             background-color: #FFF;
             color: #133814;
             text-align: left;
-            height: 25px;
+            height: 25px
         }
 
         ul {
@@ -57,13 +85,14 @@
         }
         .left {display: inline;  float: left}
         .right {display: inline;  float: right}
+
     </style>
 </div>
 
 
 <div>  // dla niezalogowanych
     <ul th:fragment="menu">
-        <li><img class="left" src="../meet.jpg" width="70px"/><a class="right" href="/">Portal społocznościowy</a></li>
+        <li><img class="left" src="../meet.jpg" width="70px"/><a class="right" href="/">Portal społecznościowy</a></li>
         <li><a href="/login">Logowanie</a></li>
         <li><a href="/rejestracja">Rejestracja</a></li>
         <li><a href="/kontakt">Kontakt z adminem</a></li>
@@ -72,11 +101,12 @@
 
 <div> // dla zalogowanych
     <ul th:fragment="menu1">
-        <li><img class="left" src="../meet.jpg" width="70px"/><a class="right" href="/lindex">Portal społocznościowy</a></li>
+        <li><img class="left" src="../meet.jpg" width="70px"/><a class="right" href="/lindex">Portal społecznościowy</a></li>
         <li><a href="/profil?doProfilu=3">Twój profil</a></li>
         <li><a href="/moiznajomi">Lista Twoich znajomych</a></li>
-        <li><a href="/zaproszenia">Osoby zapraszające Cię do grona znajomych</a></li>
-        <li><a href="/szukaj">Wyszukaj użytkownika</a></li>
+        <li><a href="/zaproszenia">Zaproszenia</a></li>
+        <li><a href="/users">Lista wszystkich osób</a></li>
+        <li><a href="/szukaj">Wyszukaj osobę</a></li>
         <li><a href="/kontakt">Kontakt z adminem</a></li>
         <li><a href="/admin">Admin</a></li>
         <li><a href="/wyloguj">Wyloguj się</a></li>
@@ -90,13 +120,14 @@
         <li><a href="/panel/szukaj">Wyszukaj użytkownika</a></li>
         <li><a href="/panel/users?a=false">Lista oczekujących na aktywację</a></li>
         <li><a href="/profil?doProfilu=1">Twój profil</a></li>
+        <li><a href="/lindex">Menu użytkownikow</a></li>
         <li><a href="/wyloguj">Wyloguj się</a></li>
     </ul>
 </div>
 
 <div th:fragment="iko_users">
     <a  class="left" title="edycja danych użytkownika" th:href="'/panel/eduser?id='+${user.id}"><img src="../edit.png" width="20px"></a>
-    <a class="right" title="skasuj użytkownika" th:href="'/deluser?id='+${user.id}"><img src="../delete.png" width="20px"></a>
+    <a class="right" title="skasuj użytkownika" th:href="'deluser?id='+${user.id}"><img src="../delete.png" width="20px"></a>
 </div>
 
 

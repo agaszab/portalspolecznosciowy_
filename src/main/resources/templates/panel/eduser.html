@@ -23,7 +23,7 @@
 
 
     <h1 style="margin-top:200px; test-align:center;">Panel administracyjny </h1>
-
+    <div class="op border border-white rounded">
     <form action="/panel/edit" method="post" th:object="${user}">
         <input type="hidden" name="id" th:field="*{id}">
         <div class="form-group">
@@ -51,7 +51,7 @@
         <button type="submit" class="btn btn-primary">Zatwierdź zmiany</button>
     </form>
 
-
+    </div>
 
 
 </div>

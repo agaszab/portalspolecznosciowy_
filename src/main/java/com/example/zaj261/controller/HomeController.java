@@ -33,12 +33,6 @@ public class HomeController {
     }
 
 
-    @GetMapping("/lindex")
-    public String zalogowani() {
-        return "zalogowani/lindex";
-
-    }
-
     @GetMapping("/login")
     public String login() {
         return "wszyscy/login";
@@ -51,8 +45,8 @@ public class HomeController {
         User user = userRepository.findByUsername(login);
         if (user != null) {
             model.addAttribute("user", user);
-            return "/zalogowani/lindex";
-        } else return "wszyscy/login";
+            return "lindex";
+        } else return "wszyscy/index";
 
     }
 
